@@ -1,24 +1,14 @@
-# README
+# Dynamic Pilgrim
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Table tennis ranking system for CoderFactory
 
-Things you may want to cover:
+# Development guidelines
 
-* Ruby version
+* Trello for planning
+* Use branches for new feature changes
+	1 branches are uploaded to github
+	2 uploader requests pull
+	3 collaborators check code and comment
+	4 once all collaborators have reviewed code, pull request accepted
+* Github issues to track issues
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
