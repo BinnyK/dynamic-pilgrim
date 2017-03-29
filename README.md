@@ -6,9 +6,9 @@ Table tennis ranking system for CoderFactory
 
 * Trello for planning
 * Use branches for new feature changes
-	1 branches are uploaded to github
-	2 uploader requests pull
-	3 collaborators check code and comment
-	4 once all collaborators have reviewed code, pull request accepted
+	* branches are uploaded to github
+	* uploader requests pull
+	* collaborators check code and comment
+	* once all collaborators have reviewed code, pull request accepted
 * Github issues to track issues
 
