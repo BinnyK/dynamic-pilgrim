@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 
 
 gem 'devise'
+gem 'carrierwave', '~> 1.0'
 
 
 # Use Capistrano for deployment
