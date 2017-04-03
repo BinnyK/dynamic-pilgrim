@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
+gem "bulma-rails", "~> 0.4.0"
 
 
 # Use Capistrano for deployment
