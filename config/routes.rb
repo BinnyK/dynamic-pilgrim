@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'pages/rankings'
+  get 'pages/faq'
   root 'pages#rankings'
 
   devise_for :users
