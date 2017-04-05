@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :games
   get 'pages/rankings'
   get 'pages/faq'
   root 'pages#rankings'
