@@ -26,4 +26,10 @@ $(document).ready(function(){
         nav.className = "nav-right nav-menu";
     }
   }
+
+  // $("nav a.nav-item").click(function(){
+  //   $("nav a").removeClass("is-active");
+  //   $(this).addClass("is-active");
+  // })
+  
 })
