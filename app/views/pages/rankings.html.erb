@@ -22,9 +22,9 @@
         </thead>
 
         <tbody>
-          <% @users.each do |user, index|%>
+          <% @users.each_with_index do |user, index|%>
             <tr>
-              <th>index</th>
+              <th><%= index + 1 %></th>
               <td><%= user.username %></td>
               <td><%= user.wins %></td>
               <td><%= user.losses %></td>
