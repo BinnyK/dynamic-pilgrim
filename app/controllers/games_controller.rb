@@ -15,6 +15,7 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    @users = User.all
   end
 
   # GET /games/1/edit
@@ -25,6 +26,14 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+
+    @winner = User.find_by_email(@game.winner_name)
+    @winner.wins += 1
+    @winner.save
+
+    @loser = User.find_by_email(@game.loser_name)
+    @loser.losses += 1
+    @loser.save
 
     respond_to do |format|
       if @game.save
@@ -69,6 +78,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.fetch(:game, {})
+      params.require(:game).permit(:winner_name, :loser_name, :winner_score, :loser_score)
     end
 end
