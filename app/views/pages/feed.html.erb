@@ -3,8 +3,8 @@
 
 <%#= image_tag(asset_path("tt1.png")) %>
 <img src="<%= asset_path("cfaponglogo.png" ) %>" class="logo-banner" />
-
-<p><%= link_to "Enter results", new_game_path, class:"button is-primary" %></p>
+<h1 class="title is-1 has-text-centered">Latest Results</h1>
+<p class="has-text-centered"><%= link_to "Enter results", new_game_path, class:"button is-primary" %></p>
 
 
 <div class="columns">
@@ -13,22 +13,22 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Date</th>
-<!--             <th>Winner</th>
+            <th>Win</th>
             <th>Score</th>
-            <th>Loser</th>
-            <th>Score</th> -->
+            <th>Lost</th>
+            <th>Score</th>
+            <th>Date</th>
           </tr>
         </thead>
 
         <tbody>
           <% @games.each do |game|%>
             <tr>
-              <th><%= "#{game.winner_name} beat #{game.loser_name} #{game.winner_score} sets to #{game.loser_score}" %></th>
-              <!-- <td><%#= game.winner_name %></td>
-              <td><%#= game.winner_score %></td>
-              <td><%#= game.loser_name %></td>
-              <td><%#= game.loser_score %></td> -->
+              <td><%= game.winner_name %></td>
+              <td><%= game.winner_score %></td>
+              <td><%= game.loser_name %></td>
+              <td><%= game.loser_score %></td>
+              <td><%= time_ago_in_words(game.created_at) %></td>
             </tr>
           <% end %>
         </tbody>
