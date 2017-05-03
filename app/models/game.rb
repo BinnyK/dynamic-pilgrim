@@ -6,7 +6,6 @@ class Game < ApplicationRecord
 		win_rank = @all_ranks.index(winner) + 1
 		los_rank = @all_ranks.index(loser) + 1
 
-
 		# If both players have the same score, do normal point system
 			# (this means if 5 plays have 0 points it still uses normal method)
 		if winner.points === loser.points
