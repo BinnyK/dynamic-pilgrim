@@ -61,10 +61,5 @@ class Game < ApplicationRecord
 		winner.save
 		loser.losses += 1
 		loser.save
-
-
 	end
-		
-
-
 end
