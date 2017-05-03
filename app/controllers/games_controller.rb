@@ -28,11 +28,11 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     # Add value to User.wins/losses attribute
-    @winner = User.find_by_email(@game.winner_name)
+    @winner = User.find_by_username(@game.winner_name)
     @winner.wins += 1
     @winner.save
 
-    @loser = User.find_by_email(@game.loser_name)
+    @loser = User.find_by_username(@game.loser_name)
     @loser.losses += 1
     @loser.save
 

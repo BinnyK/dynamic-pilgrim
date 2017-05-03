@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= f.label :winner %>
-    <%= f.select :winner_name, User.pluck(:email) %>
+    <%= f.select :winner_name, User.pluck(:username) %>
   </div>
 
   <div class="field">
@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= f.label :loser %>
-    <%= f.select :loser_name, User.pluck(:email) %>
+    <%= f.select :loser_name, User.pluck(:username) %>
   </div>
 
   <div class="field">
