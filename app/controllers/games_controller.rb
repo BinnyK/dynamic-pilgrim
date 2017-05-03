@@ -29,16 +29,13 @@ class GamesController < ApplicationController
 
     # Add value to User.wins/losses attribute
     @winner = User.find_by_username(@game.winner_name)
-    @winner.wins += 1
-    @winner.save
-
     @loser = User.find_by_username(@game.loser_name)
-    @loser.losses += 1
-    @loser.save
+
+    Game.add_result(@winner, @loser)
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
