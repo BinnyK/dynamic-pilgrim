@@ -15,7 +15,7 @@
 
     <p class="control">
       <span class="select">
-        <%= f.select :winner_name, @users.pluck(:username), :prompt => "Winner" %>  
+        <%= f.select :winner_name, User.pluck(:username), :prompt => "Winner" %>  
       </span>
     </p>
   
@@ -27,7 +27,7 @@
 
     <p class="control">
       <span class="select">
-        <%= f.select :loser_name, @users.pluck(:username), :prompt => "Loser" %>    
+        <%= f.select :loser_name, User.pluck(:username), :prompt => "Loser" %>    
       </span>
     </p>
 
