@@ -18,7 +18,7 @@ class Game < ApplicationRecord
 		# Within 2 ranks. Winner is higher rank
 		elsif los_rank > win_rank && los_rank < win_rank + 3
 			puts "======================="
-			puts "WINNER IS HIGHER RANK"
+			puts "WINNER IS HIGHER RANK WITHIN 2"
 			puts "======================="
 
 			winner.points += 2
@@ -27,7 +27,7 @@ class Game < ApplicationRecord
 		# Within 2 ranks. Winner is lower rank
 		elsif win_rank > los_rank && win_rank < los_rank + 3
 			puts "===================="
-			puts "WINNER IS LOWER RANK"
+			puts "WINNER IS LOWER RANK WITHIN 2"
 			puts "===================="
 			winner.points += 3
 			loser.points -= 2
@@ -35,14 +35,14 @@ class Game < ApplicationRecord
 		# Winner is 3 or more ranks above loser
 		elsif los_rank >= win_rank + 3
 			puts "===================="
-			puts "WINNER IS LOWER RANK"
+			puts "WINNER IS HIGHER RANK BY MORE THAN 2"
 			puts "===================="
 			winner.points += 1
 
 		# Winner is 3 or more ranks below loser
 		elsif win_rank >= los_rank + 3
 			puts "===================="
-			puts "WINNER IS LOWER RANK"
+			puts "WINNER IS LOWER RANK BY MORE THAN 2"
 			puts "===================="
 			winner.points += 5
 			loser.points -= 5
