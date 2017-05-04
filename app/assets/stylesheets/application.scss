@@ -13,13 +13,12 @@
  *= require_tree .
  *= require_self
  */
-
+$primary: #F07078;
 @import "bulma";
 
-.logoImage {
-  border-radius: 50%;
 
-}
+
+
 
 .logo-banner {
   width: 220px;
@@ -30,4 +29,8 @@
   margin-top: 50px;
   margin-bottom: 50px;
 
+}
+
+.footer {
+	margin-top: 50px;
 }
