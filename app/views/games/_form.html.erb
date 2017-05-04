@@ -1,4 +1,4 @@
-<%= form_for(game) do |f| %>
+<%= form_for(game, :html => {class: "game-form"}) do |f| %>
   <% if game.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
@@ -11,28 +11,35 @@
     </div>
   <% end %>
 
+  <div class="field is-grouped">
 
-  <div class="field">
-    <%= f.label :winner %>
-    <%= f.select :winner_name, @users.pluck(:username) %>
-  </div>
+    <p class="control">
+      <span class="select">
+        <%= f.select :winner_name, User.pluck(:username), :prompt => "Winner" %>  
+      </span>
+    </p>
+  
+    <p class="control">
+      <span class="select">
+        <%= f.select :winner_score, [3] %>  
+      </span>
+    </p>
 
-  <div class="field">
-    <%= f.label :winner_score %>
-    <%= f.number_field :winner_score %>
-  </div>
+    <p class="control">
+      <span class="select">
+        <%= f.select :loser_name, User.pluck(:username), :prompt => "Loser" %>    
+      </span>
+    </p>
 
-  <div class="field">
-    <%= f.label :loser %>
-    <%= f.select :loser_name, @users.pluck(:username) %>
-  </div>
+    <p class="control">
+      <span class="select">
+        <%= f.select :loser_score, [0, 1, 2] %>  
+      </span>
+    </p>
 
-  <div class="field">
-    <%= f.label :loser_score %>
-    <%= f.number_field :loser_score %>
-  </div>
+    <div class="actions">
+      <%= f.submit "Submit", class:"button is-primary" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>

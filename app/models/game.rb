@@ -1,4 +1,13 @@
 class Game < ApplicationRecord
+	validates :winner_name, :winner_score, :loser_name, :loser_score, presence: true
+
+	def self.checkSameName(result)
+		result.winner_name === result.loser_name ? true : false
+	end
+
+	def self.checkEmpty(result)
+		result === "" ? true : false
+	end
 
 	def self.add_result(winner, loser)
 		# Store all users into array and save rank of winner and loser
