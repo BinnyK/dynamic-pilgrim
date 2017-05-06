@@ -13,10 +13,13 @@
  *= require_tree .
  *= require_self
  */
-$primary: #F07078;
+$primary: #5DA1C6;
 @import "bulma";
 
-
+.columns.marginTopBottom {
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
 
 
 
@@ -30,8 +33,22 @@ $primary: #F07078;
   margin-bottom: 50px;
 
 }
+.game-form-div {
+	display: block;
+	text-align: center;
+}
+
+.game-form {
+	display: inline-block;
+
+}
+
+
+
+
 
 .footer {
 	margin-top: 50px;
   padding: 3rem 1.5rem 3rem;
 }
+

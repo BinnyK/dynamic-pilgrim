@@ -31,20 +31,37 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
 
-    # Add value to User.wins/losses attribute
-    @winner = User.find_by_username(@game.winner_name)
-    @loser = User.find_by_username(@game.loser_name)
+    # Check if the both winner and loser names are the same
+    if Game.checkSameName(@game)
+      flash.now[:alert] = 'Names are the same'
+      render :new
 
-    Game.add_result(@winner, @loser)
+    # Check if winner name is empty
+    elsif Game.checkEmpty(@game.winner_name)
+      flash.now[:alert] = 'Please pick the winning player'
+      render :new
+      
+    # Check if loser name is empty
+    elsif Game.checkEmpty(@game.loser_name)
+      flash.now[:alert] = 'Please pick the losing player'
+      render :new
 
-    authorize @game
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to root_path, notice: 'Game was successfully created.' }
-        format.json { render :show, status: :created, location: @game }
-      else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+
+    # Calculate the results
+    else
+      @winner = User.find_by_username(@game.winner_name)
+      @loser = User.find_by_username(@game.loser_name)
+
+      Game.add_result(@winner, @loser)
+      authorize @game
+      respond_to do |format|
+        if @game.save
+          format.html { redirect_to root_path, notice: 'Game was successfully created.' }
+          format.json { render :show, status: :created, location: @game }
+        else
+          format.html { render :new }
+          format.json { render json: @game.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

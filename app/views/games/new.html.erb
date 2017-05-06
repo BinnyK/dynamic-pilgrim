@@ -1,5 +1,8 @@
-<h1>New Game</h1>
+<img src="<%= asset_path("cfaponglogo.png" ) %>" class="logo-banner" />
+<h1 class="title is-1 has-text-centered">Enter game results</h1>
 
-<%= render 'form', game: @game %>
-
-<%= link_to 'Back', games_path %>
+<div class="columns marginTopBottom">
+  <div class="column is-8 is-offset-2 game-form-div">
+		<%= render 'form', game: @game %>
+	</div>
+</div>
