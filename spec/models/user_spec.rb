@@ -39,6 +39,11 @@ describe User do
 			expect(user.points).to eq 0
 		end
 
+		it "has default approved value of false" do
+			user = build(:user)
+			expect(user.approved).to eq false
+		end
+
 		it "has default role of user" do
 			user = create(:user)
 			expect(user.has_role? :player).to be_truthy
