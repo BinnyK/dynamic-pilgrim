@@ -8,6 +8,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates :username, presence: true
+  validates_uniqueness_of :username
 
   def admin?
      has_role?(:admin)

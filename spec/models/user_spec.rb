@@ -9,7 +9,11 @@ describe User do
 	it "is invalid without a username" do
 		expect(FactoryGirl.build(:user, username: nil).save).to be_falsey
 	end
-	it "is invalid without a unique username"
+
+	it "is invalid without a unique username" do
+		user = FactoryGirl.create(:user, username: "Freddo")
+		expect(FactoryGirl.build(:user, username: "Freddo").save).to be_falsey
+	end
 	it "is invalid without an email"
 
 end
