@@ -1,12 +1,12 @@
 
-
-
 <%#= image_tag(asset_path("tt1.png")) %>
 <img src="<%= asset_path("cfaponglogo.png" ) %>" class="logo-banner" />
 <h1 class="title is-1 has-text-centered">Rankings</h1>
-
-<p class="has-text-centered"><%= link_to "Enter results", new_game_path, class:"button is-primary" %></p>
-
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <p class="has-text-centered"><%= link_to "Enter results", new_game_path, class:"button is-primary" %></p>
+  <% end %>
+<% end %>
 
 <div class="columns">
   <div class="column is-8 is-offset-2">
@@ -37,10 +37,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
