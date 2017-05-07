@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   
   def rankings
-  	@users = User.all.order('points DESC')
+  	@users = User.where(approved: true).order('points DESC')
   end
 
   def feed
