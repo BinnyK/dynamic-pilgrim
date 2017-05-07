@@ -11,11 +11,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def update?
-<<<<<<< HEAD
     @user.admin?
-=======
-    @user.admin? or not item.published?
->>>>>>> c8434d1b1fddac891b901dae210e115b8cb476c8
   end
 
   def destroy?
