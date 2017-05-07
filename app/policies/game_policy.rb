@@ -11,7 +11,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def update?
-    @user.admin? or not item.published?
+    @user.admin?
   end
 
   def destroy?
