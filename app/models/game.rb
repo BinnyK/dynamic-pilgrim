@@ -9,11 +9,10 @@ class Game < ApplicationRecord
 		result === "" ? true : false
 	end
 
-	def self.add_result(winner, loser)
+	def self.add_result(all_ranks, winner, loser)
 		# Store all users into array and save rank of winner and loser
-		@all_ranks = User.all.order("points desc")
-		win_rank = @all_ranks.index(winner) + 1
-		los_rank = @all_ranks.index(loser) + 1
+		win_rank = all_ranks.index(winner) + 1
+		los_rank = all_ranks.index(loser) + 1
 
 		# If both players have the same score, do normal point system
 			# (this means if 5 plays have 0 points it still uses normal method)

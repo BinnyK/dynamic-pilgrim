@@ -25,17 +25,34 @@ describe Game do
 			expect(build(:game).winner_score).to eq 3
 		end
 
-		it "is invalid if loser score is 3 or larger" do
+		it "is invalid if loser score is less than 0 or greater than 2" do
 			expect(build(:game).loser_score).to eq(0).or eq(1).or eq(2)
 		end
 
 	end
 
-	describe "point calculations" do 
+	describe "class methods" do 
 
+		context "validating form inputs"
+
+			it "should return true if names are identical" do 
+				game = build(:game, winner_name: "Freddo", loser_name: "Freddo")
+				expect(Game.checkSameName(game)).to be_truthy
+			end
+
+			it "should return true if name is empty" do
+				winner_name = ""
+				expect(Game.checkEmpty(winner_name)).to be_truthy
+			end
+		end
+
+		context "calculating points" do
+
+			it ""
+
+		end
 
 	end
-
 end
 
 

@@ -7,4 +7,7 @@ FactoryGirl.define do
 		f.loser_name { Faker::Name.first_name }
 		f.loser_score 0
 	end
+
+	
+
 end
