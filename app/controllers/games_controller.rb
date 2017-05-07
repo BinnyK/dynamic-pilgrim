@@ -10,16 +10,20 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @game = Game.new
+    @users = User.all
   end
 
   # GET /games/new
   def new
     @game = Game.new
     @users = User.all
+    authorize @game
   end
 
   # GET /games/1/edit
   def edit
+    authorize @game
   end
 
   # POST /games
@@ -36,19 +40,18 @@ class GamesController < ApplicationController
     elsif Game.checkEmpty(@game.winner_name)
       flash.now[:alert] = 'Please pick the winning player'
       render :new
-      
+
     # Check if loser name is empty
     elsif Game.checkEmpty(@game.loser_name)
       flash.now[:alert] = 'Please pick the losing player'
       render :new
-
     # Calculate the results
     else
       @winner = User.find_by_username(@game.winner_name)
       @loser = User.find_by_username(@game.loser_name)
 
       Game.add_result(@winner, @loser)
-    
+      authorize @game
       respond_to do |format|
         if @game.save
           format.html { redirect_to root_path, notice: 'Game was successfully created.' }
@@ -64,6 +67,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
+    authorize @game
     respond_to do |format|
       if @game.update(game_params)
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
@@ -78,6 +82,7 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
+    authorize @game
     @game.destroy
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
