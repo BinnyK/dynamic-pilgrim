@@ -26,7 +26,7 @@
           <% @users.each_with_index do |user, index|%>
             <tr>
               <th><%= index + 1 %></th>
-              <td><%= user.username.capitalize %></td>
+              <td><%= user.username %></td>
               <td><%= user.wins %></td>
               <td><%= user.losses %></td>
               <td><%= user.points %></td>
