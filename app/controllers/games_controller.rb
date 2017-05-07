@@ -4,6 +4,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
+    redirect_to pages_feed_path
     @games = Game.all
   end
 
