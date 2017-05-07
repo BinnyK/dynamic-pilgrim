@@ -16,13 +16,13 @@
     </span>
     <div id='nav-menu' class="nav-right nav-menu">
       <a class="nav-item is-tab is-hidden-tablet is-active">Rankings</a>
-      <a class="nav-item is-tab">
+      <!-- <a class="nav-item is-tab">
         <!-- THIS IS WHERE THE AVATAR WILL GO -->
-        <figure class="image is-16x16" style="margin-right: 8px;">
+        <!-- <figure class="image is-16x16" style="margin-right: 8px;">
           <img src="http://bulma.io/images/jgthms.png">
         </figure>
-        Profile
-      </a>
+        Profile 
+      </a> -->
       <% if user_signed_in? %>
         <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "nav-item is-tab" %>
       <% else %>
