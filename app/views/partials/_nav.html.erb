@@ -6,9 +6,9 @@
       </a>
       <!-- <a class="nav-item is-tab is-hidden-mobile is-active">Rankings</a> -->
       <%= link_to "Rankings", root_path, class: "nav-item is-tab is-hidden-mobile"%>
-      <%= link_to "Feed", pages_feed_path, class: "nav-item is-tab is-hidden-mobile"%>
-      <%= link_to "FAQ", pages_faq_path, class: "nav-item is-tab is-hidden-mobile "%>
-      <%= link_to "News", pages_news_path, class: "nav-item is-tab is-hidden-mobile "%>
+      <%= link_to "Feed", feed_path, class: "nav-item is-tab is-hidden-mobile"%>
+      <%= link_to "FAQ", faq_path, class: "nav-item is-tab is-hidden-mobile "%>
+      <%= link_to "News", news_path, class: "nav-item is-tab is-hidden-mobile "%>
     </div>
     <span id="nav-toggle" class="nav-toggle">
       <span></span>
@@ -24,9 +24,9 @@
         </figure>
         Profile
       </a> -->
-      <%= link_to "Feed", pages_feed_path, class: "nav-item is-tab is-hidden-desktop is-hidden-tablet"%>
-      <%= link_to "FAQ", pages_faq_path, class: "nav-item is-tab is-hidden-desktop is-hidden-tablet "%>
-      <%= link_to "News", pages_news_path, class: "nav-item is-tab is-hidden-desktop is-hidden-tablet "%>
+      <%= link_to "Feed", feed_path, class: "nav-item is-tab is-hidden-desktop is-hidden-tablet"%>
+      <%= link_to "FAQ", faq_path, class: "nav-item is-tab is-hidden-desktop is-hidden-tablet "%>
+      <%= link_to "News", news_path, class: "nav-item is-tab is-hidden-desktop is-hidden-tablet "%>
 
       <% if user_signed_in? %>
         <%= link_to 'Edit Account', edit_user_registration_path, class: "nav-item is-tab"  %>
