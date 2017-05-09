@@ -22,6 +22,7 @@ class Game < ApplicationRecord
 			puts "======================="
 
 			winner.points += 3
+			loser.points -= 2
 
 		# Within 2 ranks. Winner is higher rank
 		elsif los_rank > win_rank && los_rank < win_rank + 3
