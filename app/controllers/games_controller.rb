@@ -52,7 +52,9 @@ class GamesController < ApplicationController
       @winner = User.find_by_username(@game.winner_name)
       @loser = User.find_by_username(@game.loser_name)
 
-      Game.add_result(@all_ranks, @winner, @loser)
+      Game.addResult(@all_ranks, @winner, @loser)
+
+
       authorize @game
       respond_to do |format|
         if @game.save

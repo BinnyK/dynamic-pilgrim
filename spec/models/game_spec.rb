@@ -60,6 +60,7 @@ describe Game do
 			@rank6 = build(:user, username: "rank6", points: 10)
 			@rank7 = build(:user, username: "rank7", points: 0)
 			@rank8 = build(:user, username: "rank8", points: 0)
+			@rankMinus = build(:user, username: "rankMinus", points: -3)
 
     	@all_ranks = [
     		@rank1,
@@ -69,7 +70,8 @@ describe Game do
     		@rank5,
     		@rank6,
     		@rank7,
-    		@rank8
+    		@rank8,
+    		@rankMinus
     	]
 
 	  end
@@ -77,12 +79,12 @@ describe Game do
 		context "winner and loser have same points" do
 
 			it "should award winner 3 points" do
-				Game.add_result(@all_ranks, @rank7, @rank8)
+				Game.addResult(@all_ranks, @rank7, @rank8)
 				expect(@rank7.points).to eq 3
 			end
 
 			it "should penalise loser 2 points" do
-				Game.add_result(@all_ranks, @rank5, @rank6)
+				Game.addResult(@all_ranks, @rank5, @rank6)
 				expect(@rank6.points).to eq 8
 			end
 
@@ -91,22 +93,22 @@ describe Game do
 		context "winner and loser are within 2 ranks" do
 
 			it "should award higher rank winner 2 points" do
-				Game.add_result(@all_ranks, @rank1, @rank2)
+				Game.addResult(@all_ranks, @rank1, @rank2)
 				expect(@rank1.points).to eq 32
 			end
 
 			it "should penalise lower rank loser 1 point" do
-				Game.add_result(@all_ranks, @rank1, @rank2)
+				Game.addResult(@all_ranks, @rank1, @rank2)
 				expect(@rank2.points).to eq 24
 			end
 
 			it "should award lower rank winner 3 points" do 
-				Game.add_result(@all_ranks, @rank2, @rank1)
+				Game.addResult(@all_ranks, @rank2, @rank1)
 				expect(@rank2.points).to eq 28
 			end
 
 			it "should penalise higher rank loser 2 points" do
-				Game.add_result(@all_ranks, @rank2, @rank1)
+				Game.addResult(@all_ranks, @rank2, @rank1)
 				expect(@rank1.points).to eq 28
 			end
 
@@ -114,17 +116,41 @@ describe Game do
 
 		context "winner and loser are 3 or more ranks apart" do
 
-			it "should award higher rank winner 1 point"
-			it "should not penalise lower rank loser"
-			it "should award lower rank winner 5 points"
-			it "should penalise higher rank 5 points"
+			it "should award higher rank winner 1 point" do
+				Game.addResult(@all_ranks, @rank1, @rank5)
+				expect(@rank1.points).to eq 31
+			end
+
+			it "should not penalise lower rank loser" do
+				Game.addResult(@all_ranks, @rank1, @rank5)
+				expect(@rank5.points).to eq 10
+			end
+
+			it "should award lower rank winner 5 points" do
+				Game.addResult(@all_ranks, @rank5, @rank1)
+				expect(@rank5.points).to eq 15
+			end
+
+			it "should penalise higher rank 5 points" do
+				Game.addResult(@all_ranks, @rank5, @rank1)
+				expect(@rank1.points).to eq 25
+			end
 
 		end
 
-		context "player's point is smaller than 0" do
-			it "should set point to 0"
-		end
+		context "player's point is 0 or lower" do
+			
+			it "should set point to 0" do 
+				Game.addResult(@all_ranks, @rank6, @rankMinus)
+				expect(@rankMinus.points).to be 0
+			end
 
+			it "should not deduct points past 0" do
+				Game.addResult(@all_ranks, @rankMinus, @rank8)
+				expect(@rank8.points).to be 0
+			end
+
+		end
 	end
 
 end

@@ -1,15 +1,18 @@
 class Game < ApplicationRecord
 	validates :winner_name, :winner_score, :loser_name, :loser_score, presence: true
 
+	# Check if winner name and loser name are identical
 	def self.checkSameName(result)
 		result.winner_name === result.loser_name ? true : false
 	end
 
-	def self.checkEmpty(result)
-		result === "" ? true : false
+	# Check if username is empty
+	def self.checkEmpty(username)
+		username === "" ? true : false
 	end
 
-	def self.add_result(all_ranks, winner, loser)
+	# Calculate points
+	def self.addResult(all_ranks, winner, loser)
 		# Store all users into array and save rank of winner and loser
 		win_rank = all_ranks.index(winner) + 1
 		los_rank = all_ranks.index(loser) + 1
@@ -70,4 +73,12 @@ class Game < ApplicationRecord
 		loser.losses += 1
 		loser.save
 	end
+
 end
+
+
+
+
+
+
+
