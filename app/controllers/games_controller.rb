@@ -48,11 +48,12 @@ class GamesController < ApplicationController
       render :new
     # Calculate the results
     else
-      # @all_ranks = User.all.order("points desc")
+      @all_ranks = User.all.order("points desc")
       @winner = User.find_by_username(@game.winner_name)
       @loser = User.find_by_username(@game.loser_name)
 
       Game.setElo(@winner, @loser)
+      Game.add_result(@all_ranks, @winner, @loser)
       authorize @game
       respond_to do |format|
         if @game.save

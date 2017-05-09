@@ -18,9 +18,10 @@ class User < ApplicationRecord
   def assign_default_role
     self.add_role(:player) if self.roles.blank?
   end
-  
+
   def assign_elo
     self.elo = 1500;
+    self.save
   end
 
 end

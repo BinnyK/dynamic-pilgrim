@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
-  
+
   def rankings
+  	@users = User.where(approved: true).order('points DESC, wins DESC')
+  end
+  def ELO
   	@users = User.where(approved: true).order('points DESC, wins DESC')
   end
 
