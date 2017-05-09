@@ -33,7 +33,7 @@ describe Game do
 
 	describe "class methods" do 
 
-		context "validating form inputs"
+		context "validating form inputs" do
 
 			it "should return true if names are identical" do 
 				game = build(:game, winner_name: "Freddo", loser_name: "Freddo")
@@ -44,15 +44,67 @@ describe Game do
 				winner_name = ""
 				expect(Game.checkEmpty(winner_name)).to be_truthy
 			end
-		end
-
-		context "calculating points" do
-
-			it ""
 
 		end
 
 	end
+	
+	describe "calculating game result" do
+		
+		before(:each) do
+			@rank1 = build(:user, username: "rank1", points: 30)
+			@rank2 = build(:user, username: "rank2", points: 25)
+			@rank3 = build(:user, username: "rank3", points: 20)
+			@rank4 = build(:user, username: "rank4", points: 15)
+			@rank5 = build(:user, username: "rank5", points: 0)
+			@rank6 = build(:user, username: "rank6", points: 0)
+
+    	@all_ranks = [
+    		@rank1,
+    		@rank2,
+    		@rank3,
+    		@rank4,
+    		@rank5,
+    		@rank6
+    	]
+
+	  end
+
+		context "winner and loser have same points" do
+
+			it "should award winner 3 points" do
+				Game.add_result(@all_ranks, @rank5, @rank6)
+				expect(@rank5.points).to eq 3
+			end
+
+			# it "should penalise loser"
+
+		end
+
+		context "winner and loser are within 2 ranks" do
+
+			it "should award higher rank winner 2 points"
+			it "should penalise lower rank loser 1 point"
+			it "should award lower rank winner 3 points"
+			it "should penalise higher rank loser 2 points"
+
+		end
+
+		context "winner and loser are 3 or more ranks apart" do
+
+			it "should award higher rank winner 1 point"
+			it "should not penalise lower rank loser"
+			it "should award lower rank winner 5 points"
+			it "should penalise higher rank 5 points"
+
+		end
+
+		context "player's point is smaller than 0" do
+			it "should set point to 0"
+		end
+
+	end
+
 end
 
 
