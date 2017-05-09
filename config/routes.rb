@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :games
-  get 'pages/rankings'
-  get 'pages/feed'
-  get 'pages/faq'
-  get 'pages/news'
+  get '/rankings', to: 'pages#rankings'
+  get '/feed', to: 'pages#feed'
+  get '/faq', to: 'pages#faq'
+  get '/news', to: 'pages#news'
   root 'pages#rankings'
 
   devise_for :users
