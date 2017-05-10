@@ -21,16 +21,14 @@ $primary: #5DA1C6;
 	margin-bottom: 80px;
 }
 
-
-
 .logo-banner {
-  width: 220px;
+  width: 120px;
   height: auto;
   border-radius: 50%;
   display: block;
   margin: 0 auto;
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 
 }
 .game-form-div {
@@ -63,7 +61,16 @@ $primary: #5DA1C6;
 	margin-top: 1em;
 }
 
+.center-text {
+  text-align: center;
+}
+.main-title {
+  margin-bottom: 50px;
+}
 
+.box {
+  padding: 10px;
+}
 
 
 .footer {
