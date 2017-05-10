@@ -117,11 +117,14 @@ class Game < ApplicationRecord
 		array.each do |user|
 
 			games = user.wins.to_f + user.losses.to_f
-			percentage = (user.wins / games) * 100
 
-			if percentage > win_percentage
-				player = user
-				win_percentage = percentage.to_i
+			if games >= 5
+				percentage = (user.wins / games) * 100
+
+				if percentage > win_percentage
+					player = user
+					win_percentage = percentage.to_i
+				end
 			end
 		end
 

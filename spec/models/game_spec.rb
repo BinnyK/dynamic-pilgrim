@@ -190,6 +190,13 @@ describe Game do
 				expect(player).to be @player3
 			end
 
+			it "should only work for over 5 total games" do
+				player1 = build(:user, username: "player1", wins: 4, losses: 0)
+				player2 = build(:user, username: "player2", wins: 10, losses: 2)
+				player = Game.findPlayerMostWinPerc([player1, player2])
+				expect(player).to be player2
+			end
+
 		end
 
 	end
