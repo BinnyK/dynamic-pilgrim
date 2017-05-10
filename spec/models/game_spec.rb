@@ -153,6 +153,47 @@ describe Game do
 		end
 	end
 
+	describe "calculating badge methods" do
+
+		before(:each) do
+			@player1 = build(:user, username: "player1", wins: 30, losses: 30)
+			@player2 = build(:user, username: "player2", wins: 25, losses: 25)
+			@player3 = build(:user, username: "player3", wins: 20, losses: 10)
+			@player4 = build(:user, username: "player4", wins: 15, losses: 15)
+			@all_users = [@player1, @player2, @player3, @player4]
+		end
+
+		context "player has most amount of games" do
+
+			it "should return player with most amount of games" do
+
+				player = Game.findPlayerMostGames(@all_users)
+				expect(player).to be @player1
+
+			end
+
+		end
+
+		context "player has the most amount of losses" do
+
+			it "should return player with the most amount of losses" do
+				player = Game.findPlayerMostLosses(@all_users)
+				expect(player).to be @player1
+			end
+
+		end
+
+		context "player has the highest win percentage" do
+			
+			it "should return player with the highest win percentage" do
+				player = Game.findPlayerMostWinPerc(@all_users)
+				expect(player).to be @player3
+			end
+
+		end
+
+	end
+
 end
 
 

@@ -74,7 +74,64 @@ class Game < ApplicationRecord
 		loser.save
 	end
 
+	# Find player with most games played
+	def self.findPlayerMostGames(array)
+		
+		highest_games = 0
+		result_player = ""
+
+		array.each do |user|
+
+			user_total = user.wins + user.losses
+
+			if user_total > highest_games
+				highest_games = user_total
+				result_player = user
+			end
+		end
+
+		return result_player
+	end
+
+	# Find player with most losses
+	def self.findPlayerMostLosses(array)
+		total_losses = 0
+		player = ""
+
+		array.each do |user|
+			if user.losses > total_losses
+				total_losses = user.losses
+				player = user
+			end
+		end
+
+		return player
+	end
+
+	# Find player with highest win percentage
+	def self.findPlayerMostWinPerc(array)
+
+		win_percentage = 0
+		player = ""
+
+		array.each do |user|
+
+			games = user.wins.to_f + user.losses.to_f
+			percentage = (user.wins / games) * 100
+
+			if percentage > win_percentage
+				player = user
+				win_percentage = percentage.to_i
+			end
+		end
+
+		return player
+
+	end
+
 end
+
+
 
 
 
