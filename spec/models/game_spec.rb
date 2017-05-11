@@ -153,6 +153,82 @@ describe Game do
 		end
 	end
 
+	describe "calculating badge methods" do
+
+		before(:each) do
+			@player1 = build(:user, username: "player1", wins: 30, losses: 30)
+			@player2 = build(:user, username: "player2", wins: 25, losses: 25)
+			@player3 = build(:user, username: "player3", wins: 20, losses: 10)
+			@player4 = build(:user, username: "player4", wins: 15, losses: 15)
+			@all_users = [@player1, @player2, @player3, @player4]
+		end
+
+		context "player has most amount of games" do
+
+			it "should return player with most amount of games" do
+
+				player = Game.findPlayerMostGames(@all_users)
+				expect(player).to be @player1
+
+			end
+
+		end
+
+		context "player has the most amount of losses" do
+
+			it "should return player with the most amount of losses" do
+				player = Game.findPlayerMostLosses(@all_users)
+				expect(player).to be @player1
+			end
+
+		end
+
+		context "player has the highest win percentage" do
+			
+			it "should return player with the highest win percentage" do
+				player = Game.findPlayerMostWinPerc(@all_users)
+				expect(player).to be @player3
+			end
+
+			it "should only work for over 5 total games" do
+				player1 = build(:user, username: "player1", wins: 4, losses: 0)
+				player2 = build(:user, username: "player2", wins: 10, losses: 2)
+				player = Game.findPlayerMostWinPerc([player1, player2])
+				expect(player).to be player2
+			end
+
+		end
+
+		context "player has not played recently" do
+
+			it "should return player who hasn't played a game" do
+				user1 = build(:user, username: "user1", wins: 0, losses: 0)
+				user2 = build(:user, username: "user2", wins: 2, losses: 0)
+
+				player = Game.findAFK([user1, user2])
+				expect(player).to be user1
+			end
+
+		end
+
+		context "player has versed multiple opponents" do 
+
+			it "should return player with the most number of unique opponents" do
+				game1 = build(:game, winner_name: "player1", loser_name: "player2")
+				game2 = build(:game, winner_name: "player2", loser_name: "player1")
+				game3 = build(:game, winner_name: "player3", loser_name: "player4")
+				game4 = build(:game, winner_name: "player1", loser_name: "player4")
+				game5 = build(:game, winner_name: "player3", loser_name: "player1")
+				games = [game1, game2, game3, game4, game5]
+
+				username = Game.findMostOpponent(@all_users, games)
+				expect(username).to be @player1
+			end
+
+		end
+
+	end
+
 end
 
 

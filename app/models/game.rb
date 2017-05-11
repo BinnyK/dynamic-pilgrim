@@ -74,7 +74,140 @@ class Game < ApplicationRecord
 		loser.save
 	end
 
+	# Find player with most games played
+	def self.findPlayerMostGames(array)
+		
+		highest_games = 0
+		result_player = ""
+
+		array.each do |user|
+
+			user_total = user.wins + user.losses
+
+			if user_total > highest_games
+				highest_games = user_total
+				result_player = user
+			end
+		end
+
+		return result_player
+	end
+
+	# Find player with most losses
+	def self.findPlayerMostLosses(array)
+		total_losses = 0
+		player = ""
+
+		array.each do |user|
+			if user.losses > total_losses
+				total_losses = user.losses
+				player = user
+			end
+		end
+
+		return player
+	end
+
+	# Find player with highest win percentage
+	def self.findPlayerMostWinPerc(array)
+
+		win_percentage = 0
+		player = ""
+
+		array.each do |user|
+
+			games = user.wins.to_f + user.losses.to_f
+
+			if games >= 5
+				percentage = (user.wins / games) * 100
+
+				if percentage > win_percentage
+					player = user
+					win_percentage = percentage.to_i
+				end
+			end
+		end
+
+		return player
+
+	end
+
+	# Find afk user
+	def self.findAFK(array)
+		player = ""
+		games = 20
+
+		array.each do |user|
+			user_games = user.wins + user.losses
+			
+			if user_games <= games
+				games = user_games
+				player = user
+			end
+		end
+		return player
+
+	end
+
+	# Find player with most opponents
+	def self.findMostOpponent(users, games)
+		# Create count variable = 0
+		opponent_count = 0
+		# Create result user variable
+		most_opponent = ""
+		# Create empty array
+		temp_array = []
+
+		# Loop through each user
+		users.each do |user|
+
+			# then loop through each game.
+			games.each do |game|
+				# If user's username matches game.winner_name
+				if user.username == game.winner_name
+					# if empty array doesn't have game.loser_name
+					if temp_array.include?(game.loser_name) == false
+						# Push into empty array
+						temp_array.push(game.loser_name)
+					end
+
+				# else if user's username matches game.loser_name		
+				elsif user.username == game.loser_name
+					# if empty array doesn't have game.winner_name
+					if temp_array.include?(game.winner_name) == false
+						# Push into empty array
+						temp_array.push(game.winner_name)
+					end
+				end
+
+
+				# If empty array count > count variable
+				if temp_array.count > opponent_count
+					# count variable = empty array.count
+					opponent_count = temp_array.count
+					# result user = user
+					most_opponent = user
+				else
+					# reset empty array
+					temp_array = []
+				end
+			end
+		end
+		# return result user
+		return most_opponent
+	end
+
 end
+
+
+
+
+
+
+
+
+
+
 
 
 
