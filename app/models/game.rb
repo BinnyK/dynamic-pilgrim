@@ -132,7 +132,80 @@ class Game < ApplicationRecord
 
 	end
 
+	# Find afk user
+	def self.findAFK(array)
+		player = ""
+		games = 20
+
+		array.each do |user|
+			user_games = user.wins + user.losses
+			
+			if user_games <= games
+				games = user_games
+				player = user
+			end
+		end
+		return player
+
+	end
+
+	# Find player with most opponents
+	def self.findMostOpponent(users, games)
+		# Create count variable = 0
+		opponent_count = 0
+		# Create result user variable
+		most_opponent = ""
+		# Create empty array
+		temp_array = []
+
+		# Loop through each user
+		users.each do |user|
+
+			# then loop through each game.
+			games.each do |game|
+				# If user's username matches game.winner_name
+				if user.username == game.winner_name
+					# if empty array doesn't have game.loser_name
+					if temp_array.include?(game.loser_name) == false
+						# Push into empty array
+						temp_array.push(game.loser_name)
+					end
+
+				# else if user's username matches game.loser_name		
+				elsif user.username == game.loser_name
+					# if empty array doesn't have game.winner_name
+					if temp_array.include?(game.winner_name) == false
+						# Push into empty array
+						temp_array.push(game.winner_name)
+					end
+				end
+
+
+				# If empty array count > count variable
+				if temp_array.count > opponent_count
+					# count variable = empty array.count
+					opponent_count = temp_array.count
+					# result user = user
+					most_opponent = user
+				else
+					# reset empty array
+					temp_array = []
+				end
+			end
+		end
+		# return result user
+		return most_opponent
+	end
+
 end
+
+
+
+
+
+
+
+
 
 
 

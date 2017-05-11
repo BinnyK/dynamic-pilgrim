@@ -199,6 +199,34 @@ describe Game do
 
 		end
 
+		context "player has not played recently" do
+
+			it "should return player who hasn't played a game" do
+				user1 = build(:user, username: "user1", wins: 0, losses: 0)
+				user2 = build(:user, username: "user2", wins: 2, losses: 0)
+
+				player = Game.findAFK([user1, user2])
+				expect(player).to be user1
+			end
+
+		end
+
+		context "player has versed multiple opponents" do 
+
+			it "should return player with the most number of unique opponents" do
+				game1 = build(:game, winner_name: "player1", loser_name: "player2")
+				game2 = build(:game, winner_name: "player2", loser_name: "player1")
+				game3 = build(:game, winner_name: "player3", loser_name: "player4")
+				game4 = build(:game, winner_name: "player1", loser_name: "player4")
+				game5 = build(:game, winner_name: "player3", loser_name: "player1")
+				games = [game1, game2, game3, game4, game5]
+
+				username = Game.findMostOpponent(@all_users, games)
+				expect(username).to be @player1
+			end
+
+		end
+
 	end
 
 end

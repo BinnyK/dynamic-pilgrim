@@ -5,6 +5,11 @@ class PagesController < ApplicationController
   	@user_most_games 	= Game.findPlayerMostGames(@users)
   	@user_most_losses = Game.findPlayerMostLosses(@users)
   	@user_high_perc		= Game.findPlayerMostWinPerc(@users)
+  	@user_afk					= Game.findAFK(@users)
+
+  	@games = Game.all
+
+  	@user_most_opp		= Game.findMostOpponent(@users, @games)
   end
 
   def feed
