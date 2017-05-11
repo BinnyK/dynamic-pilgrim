@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/feed', to: 'pages#feed'
   get '/faq', to: 'pages#faq'
   get '/news', to: 'pages#news'
+  get '/api/games', to: 'api#games'
   root 'pages#rankings'
 
   devise_for :users
