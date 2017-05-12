@@ -197,6 +197,21 @@ class Game < ApplicationRecord
 		return most_opponent
 	end
 
+
+	# This method is just to update all game ids. This is to back track
+	def self.updateGameIds(games)
+		
+		games.each do |game|	
+			user_winner = User.where(username: game.winner_name).first
+			user_loser 	= User.where(username: game.loser_name).first
+			puts "Winner user is #{user_winner.inspect}" 
+
+			game.winner_id = user_winner.id
+			game.loser_id  = user_loser.id
+			game.save
+		end
+	end
+
 end
 
 
