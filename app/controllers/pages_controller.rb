@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   def feed
       @q = Game.search(params[:q])
       @games = Game.all.order("created_at desc")
-      @games = @q.result(distinct: true)
+      @games = @q.result(distinct: true).order("created_at desc")
   end
 
 
