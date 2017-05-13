@@ -4,10 +4,15 @@ Rails.application.routes.draw do
   get '/feed', to: 'pages#feed'
   get '/faq', to: 'pages#faq'
   get '/news', to: 'pages#news'
+  # get '/api/games', to: 'api#games'
   root 'pages#rankings'
 
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
+  namespace :api do
+    namespace :v1, defaults: { format: :json } do
+      resources :games
+      resources :players
+    end
+  end
 end
