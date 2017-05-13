@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  
+
   def rankings
   	@users 						= User.where(approved: true).order('points DESC, wins DESC, losses DESC')
   	@user_most_games 	= Game.findPlayerMostGames(@users)
@@ -13,8 +13,11 @@ class PagesController < ApplicationController
   end
 
   def feed
-  	@games = Game.all.order("created_at desc")
+      @q = Game.search(params[:q])
+      @games = Game.all.order("created_at desc")
+      @games = @q.result(distinct: true)
   end
+
 
   def faq
   end
