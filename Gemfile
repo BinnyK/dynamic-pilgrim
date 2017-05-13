@@ -11,7 +11,7 @@ gem 'rolify'
 gem 'rails', '~> 5.0.2'
 
 gem 'pg'
-
+gem 'ransack'
 
 
 

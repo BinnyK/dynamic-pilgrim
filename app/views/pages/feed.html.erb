@@ -8,6 +8,14 @@
   <% end %>
 <% end %>
 
+<%= search_form_for @search, url: feed_path do |f| %>
+  <div class="field has-text-centered">
+    <%#= f.label :winner_name_or_loser_name_cont, "Search for Something" %>
+    <%= f.text_field :winner_name_or_loser_name_cont %>
+  </div>
+  <div class="actions has-text-centered"><%= f.submit "Search", class:"button is-primary" %></div>
+<% end %>
+
 
 <div class="columns">
   <div class="column is-8 is-offset-2">
