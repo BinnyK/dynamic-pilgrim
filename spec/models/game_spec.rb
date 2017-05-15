@@ -229,6 +229,47 @@ describe Game do
 
 	end
 
+	describe "calculating head to head" do
+
+		before(:each) do
+			@player1 = build(:user, id: 1,username: "player1", wins: 30, losses: 30)
+			@player2 = build(:user, id: 2,username: "player2", wins: 25, losses: 25)
+
+			game1 = build(:game, winner_id: @player1.id, winner_name: "player1", winner_score: 3, loser_id: @player2.id, loser_name: "player2", loser_score: 1)
+			game2 = build(:game, winner_id: @player2.id, winner_name: "player2", winner_score: 3, loser_id: @player1.id, loser_name: "player1", loser_score: 1)
+			game3 = build(:game, winner_id: nil, winner_name: "player3", winner_score: 3, loser_id:nil , loser_name: "player4", loser_score: 1)
+			game4 = build(:game, winner_id: @player1.id, winner_name: "player1", winner_score: 3, loser_id:nil , loser_name: "player4", loser_score: 1)
+			game5 = build(:game, winner_id: nil, winner_name: "player3", winner_score: 3, loser_id: @player1.id, loser_name: "player1", loser_score: 1)
+			game6 = build(:game, winner_id: @player2.id, winner_name: "player2", winner_score: 3, loser_id: @player1.id, loser_name: "player1", loser_score: 1)
+			@games = [game1, game2, game3, game4, game5, game6]
+		end
+
+		context "calculate total common games played" do
+
+			it "should return total games played against each other" do
+				common_games = Game.calculateCommonGames(@games, @player1, @player2)
+				expect(common_games.count).to eq 3
+			end
+
+			it "should return total wins and losses between total games" do
+				common_games = Game.calculateCommonGames(@games, @player1, @player2)
+				results = Game.calculateWinLoss(common_games, @player1)
+				expect(results).to eq [1,2]
+			end
+
+			it "should return total sets won by each player" do
+				common_games = Game.calculateCommonGames(@games, @player1, @player2)
+				results1 = Game.calculateSets(common_games, @player1)
+				results2 = Game.calculateSets(common_games, @player2)
+				expect(results1).to eq 5
+				expect(results2).to eq 7
+
+			end
+
+		end
+
+	end
+
 end
 
 
