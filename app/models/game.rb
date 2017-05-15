@@ -76,7 +76,7 @@ class Game < ApplicationRecord
 
 	# Find player with most games played
 	def self.findPlayerMostGames(array)
-		
+
 		highest_games = 0
 		result_player = ""
 
@@ -139,7 +139,7 @@ class Game < ApplicationRecord
 
 		array.each do |user|
 			user_games = user.wins + user.losses
-			
+
 			if user_games <= games
 				games = user_games
 				player = user
@@ -150,57 +150,56 @@ class Game < ApplicationRecord
 	end
 
 	# Find player with most opponents
-	def self.findMostOpponent(users, games)
-		# Create count variable = 0
-		opponent_count = 0
-		# Create result user variable
-		most_opponent = ""
-		# Create empty array
-		temp_array = []
+		def self.findMostOpponent(users, games)
+			# Create count variable = 0
+			opponent_count = 0
+			# Create result user variable
+			most_opponent = ""
+			# Create empty array
+			temp_array = []
 
-		# Loop through each user
-		users.each do |user|
+			# Loop through each user
+			users.each do |user|
 
-			# then loop through each game.
-			games.each do |game|
-				# If user's username matches game.winner_name
-				if user.username == game.winner_name
-					# if empty array doesn't have game.loser_name
-					if temp_array.include?(game.loser_name) == false
-						# Push into empty array
-						temp_array.push(game.loser_name)
-					end
-
-				# else if user's username matches game.loser_name		
-				elsif user.username == game.loser_name
-					# if empty array doesn't have game.winner_name
-					if temp_array.include?(game.winner_name) == false
-						# Push into empty array
-						temp_array.push(game.winner_name)
+				# then loop through each game.
+				games.each do |game|
+					# If user's username matches game.winner_name
+					if user.username == game.winner_name
+						# if empty array doesn't have game.loser_name
+						if temp_array.include?(game.loser_name) == false
+							# Push into empty array
+							temp_array.push(game.loser_name)
+						end
+					# else if user's username matches game.loser_name
+					elsif user.username == game.loser_name
+						# if empty array doesn't have game.winner_name
+						if temp_array.include?(game.winner_name) == false
+							# Push into empty array
+							temp_array.push(game.winner_name)
+						end
 					end
 				end
-
-
 				# If empty array count > count variable
 				if temp_array.count > opponent_count
 					# count variable = empty array.count
 					opponent_count = temp_array.count
 					# result user = user
 					most_opponent = user
+					# reset empty array
+					temp_array = []
 				else
 					# reset empty array
 					temp_array = []
 				end
 			end
+			# return result user
+			return most_opponent
 		end
-		# return result user
-		return most_opponent
-	end
 
 
 	# This method is just to update all game ids. This is to back track
 	def self.updateGameIds(games)
-		
+
 		games.each do |game|
 			user_winner = User.where(username: game.winner_name).first
 			user_loser 	= User.where(username: game.loser_name).first
@@ -212,20 +211,3 @@ class Game < ApplicationRecord
 	end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
