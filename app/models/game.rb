@@ -180,6 +180,7 @@ class Game < ApplicationRecord
 					end
 				end
 
+<<<<<<< HEAD
 
 
 			end
@@ -194,10 +195,65 @@ class Game < ApplicationRecord
 			else
 				# reset empty array
 				temp_array = []
+
 			end
 		end
 		# return result user
 		return most_opponent
+	end
+
+
+	# This method is just to update all game ids. This is to back track
+	def self.updateGameIds(games)
+
+		games.each do |game|
+			user_winner = User.where(username: game.winner_name).first
+			user_loser 	= User.where(username: game.loser_name).first
+
+			game.winner_id = user_winner.id
+			game.loser_id  = user_loser.id
+			game.save
+		end
+	end
+
+	# Return the total number of games shared between 2 players
+
+	def self.calculateCommonGames(games, player1, player2)
+		common_games = []
+		# loop through all games
+		games.each do |game|
+			# if (winner.id == player1.id && loser.id == player2.id ) || (winner.id == player 2 && loser.id == player1.id )
+			if ((game.winner_id == player1.id && game.loser_id == player2.id) ||
+				  (game.winner_id == player2.id && game.loser_id == player1.id))
+			# increment counter
+				common_games.push(game)
+			end
+		end
+		common_games
+	end
+
+	def self.calculateWinLoss(games, player)
+		counter = 0
+		games.each do |game|
+			if (game.winner_id == player.id)
+				counter += 1
+			end
+		end
+		[counter, games.count - counter]
+	end
+
+	def self.calculateSets(games, player)
+		counter = 0
+		games.each do |game|
+			if (game.winner_id == player.id)
+				counter += game.winner_score
+			end
+
+			if (game.loser_id == player.id)
+				counter += game.loser_score
+			end
+		end
+		counter
 	end
 
 end
