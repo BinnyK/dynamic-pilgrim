@@ -76,7 +76,7 @@ class Game < ApplicationRecord
 
 	# Find player with most games played
 	def self.findPlayerMostGames(array)
-		
+
 		highest_games = 0
 		result_player = ""
 
@@ -139,7 +139,7 @@ class Game < ApplicationRecord
 
 		array.each do |user|
 			user_games = user.wins + user.losses
-			
+
 			if user_games <= games
 				games = user_games
 				player = user
@@ -171,7 +171,7 @@ class Game < ApplicationRecord
 						temp_array.push(game.loser_name)
 					end
 
-				# else if user's username matches game.loser_name		
+				# else if user's username matches game.loser_name
 				elsif user.username == game.loser_name
 					# if empty array doesn't have game.winner_name
 					if temp_array.include?(game.winner_name) == false
@@ -181,16 +181,19 @@ class Game < ApplicationRecord
 				end
 
 
-				# If empty array count > count variable
-				if temp_array.count > opponent_count
-					# count variable = empty array.count
-					opponent_count = temp_array.count
-					# result user = user
-					most_opponent = user
-				else
-					# reset empty array
-					temp_array = []
-				end
+
+			end
+			# If empty array count > count variable
+			if temp_array.count > opponent_count
+				# count variable = empty array.count
+				opponent_count = temp_array.count
+				# result user = user
+				most_opponent = user
+				# reset empty array
+				temp_array = []
+			else
+				# reset empty array
+				temp_array = []
 			end
 		end
 		# return result user
@@ -198,20 +201,3 @@ class Game < ApplicationRecord
 	end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
