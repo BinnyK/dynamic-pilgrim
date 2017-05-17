@@ -180,8 +180,6 @@ class Game < ApplicationRecord
 					end
 				end
 
-<<<<<<< HEAD
-
 
 			end
 			# If empty array count > count variable
