@@ -11,6 +11,9 @@ class PagesController < ApplicationController
 
   	@user_most_opp		= Game.findMostOpponent(@users, @games)
   end
+  def ELO
+  	@users = User.where(approved: true).order('points DESC, wins DESC')
+  end
 
   def feed
       @q = Game.search(params[:q])

@@ -1,6 +1,34 @@
 class Game < ApplicationRecord
 	validates :winner_name, :winner_score, :loser_name, :loser_score, presence: true
 
+# ELO System based off https://www.chessclub.com/user/help/ratings
+
+	def self.expectedScore(player_elo, opponent_elo)
+		expected = 1/(1+10**((opponent_elo-player_elo)/400)).rationalize
+	end
+
+	def self.setElo(winner, loser)
+		# k factor helps shape how big/small changes in ELO should be
+		k = 32
+
+		# The % expected chance that the winner would win based off current ELO vs opponent's ELO
+		winner_expected = expectedScore(winner.elo.to_f, loser.elo.to_f)
+		puts "winner_expected: #{winner_expected}"
+		# The % expected chance that the loser would win based off current ELO vs opponent's ELO
+		loser_expected = expectedScore(loser.elo.to_f, winner.elo.to_f)
+		puts "loser_expected: #{loser_expected}"
+
+		# Assigning the new ELO for players based off the expected chance of winning and the k factor
+		winner.elo = winner.elo + (k*(1 - winner_expected))
+		puts "winner.elo: #{winner.elo}"
+		loser.elo = loser.elo + (k*(0 - loser_expected))
+		puts "loser.elo: #{loser.elo}"
+
+		# Save the elo of each player
+		winner.save
+		loser.save
+	end
+
 	# Check if winner name and loser name are identical
 	def self.checkSameName(result)
 		result.winner_name === result.loser_name ? true : false
@@ -11,8 +39,10 @@ class Game < ApplicationRecord
 		username === "" ? true : false
 	end
 
+
 	# Calculate points
 	def self.addResult(all_ranks, winner, loser)
+
 		# Store all users into array and save rank of winner and loser
 		win_rank = all_ranks.index(winner) + 1
 		los_rank = all_ranks.index(loser) + 1
@@ -179,8 +209,6 @@ class Game < ApplicationRecord
 						temp_array.push(game.winner_name)
 					end
 				end
-
-
 			end
 			# If empty array count > count variable
 			if temp_array.count > opponent_count
