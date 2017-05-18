@@ -209,7 +209,6 @@ class Game < ApplicationRecord
 						temp_array.push(game.winner_name)
 					end
 				end
-
 			end
 			# If empty array count > count variable
 			if temp_array.count > opponent_count
