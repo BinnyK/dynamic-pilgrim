@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Game do
 
 	describe "validation" do
-		
+
 		it "has a valid factory" do
 			expect(build(:game)).to be_truthy
 		end
 
-		it "is invalid without a winner name" do 
+		it "is invalid without a winner name" do
 			expect(build(:game).winner_name).to_not be_empty
 		end
 
@@ -31,11 +31,11 @@ describe Game do
 
 	end
 
-	describe "class methods" do 
+	describe "class methods" do
 
-		context "validating form inputs"
+		context "validating form inputs" do
 
-			it "should return true if names are identical" do 
+			it "should return true if names are identical" do
 				game = build(:game, winner_name: "Freddo", loser_name: "Freddo")
 				expect(Game.checkSameName(game)).to be_truthy
 			end
