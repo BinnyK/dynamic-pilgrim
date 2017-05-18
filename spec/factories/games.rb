@@ -8,6 +8,4 @@ FactoryGirl.define do
 		f.loser_score 0
 	end
 
-	
-
 end

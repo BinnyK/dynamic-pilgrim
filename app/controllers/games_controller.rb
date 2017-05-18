@@ -52,8 +52,16 @@ class GamesController < ApplicationController
       @winner = User.find_by_username(@game.winner_name)
       @loser = User.find_by_username(@game.loser_name)
 
+<<<<<<< HEAD
       Game.setElo(@winner, @loser)
       Game.add_result(@all_ranks, @winner, @loser)
+=======
+      @game.winner_id = @winner.id
+      @game.loser_id = @loser.id
+
+      Game.addResult(@all_ranks, @winner, @loser)
+
+>>>>>>> upstream/master
       authorize @game
       respond_to do |format|
         if @game.save

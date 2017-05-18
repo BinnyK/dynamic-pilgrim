@@ -3,6 +3,7 @@ require 'spec_helper'
 describe User do
 
 	describe "validations" do
+		
 		it "has a valid factory" do 
 			expect(build(:user)).to be_truthy
 		end

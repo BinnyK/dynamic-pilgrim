@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  before_filter :set_search
+
+  def set_search
+  @search = Game.search(params[:q])
+  end
+
   private
 
   def user_not_authorized

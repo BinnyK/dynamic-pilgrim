@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170509031745) do
+=======
+ActiveRecord::Schema.define(version: 20170512132849) do
+>>>>>>> upstream/master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +26,8 @@ ActiveRecord::Schema.define(version: 20170509031745) do
     t.integer  "winner_score", default: 3
     t.string   "loser_name"
     t.integer  "loser_score",  default: 0
+    t.integer  "winner_id"
+    t.integer  "loser_id"
   end
 
   create_table "roles", force: :cascade do |t|

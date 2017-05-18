@@ -1,0 +1,42 @@
+<br>
+<div class="has-text-centered">
+
+<h1 class="title is-3"><%= @user.username %></h1>
+<p class="title is-6">Points: <%= @user.points %></p>
+<p class="title is-6">Wins: <%= @user.wins %></p>
+<p class="title is-6">Losses: <%= @user.losses %></p>
+<br>
+</div>
+<div class="columns">
+  <div class="column is-8 is-offset-2">
+    <div class="table-box has-text-centered">
+      <h1 class="title is-4"><%= @user.username %>'s Matches</h1>
+      <br>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Win</th>
+            <th>Score</th>
+            <th>Lost</th>
+            <th>Score</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @games.each do |game| %>
+            <% if game.winner_name == @user.username || game.loser_name == @user.username %>
+              <tr>
+                <td><%= game.winner_name %></td>
+                <td><%= game.winner_score %></td>
+                <td><%= game.loser_name %></td>
+                <td><%= game.loser_score %></td>
+                <td><%= time_ago_in_words(game.created_at) %></td>
+              </tr>
+            <%else %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

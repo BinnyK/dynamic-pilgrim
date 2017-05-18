@@ -11,7 +11,7 @@ gem 'rolify'
 gem 'rails', '~> 5.0.2'
 
 gem 'pg'
-
+gem 'ransack'
 
 
 
@@ -52,6 +52,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker'
+  gem 'capybara'
 end
 
 group :development do
