@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :games
   get '/rankings', to: 'pages#rankings'
+  get '/elo', to: 'pages#elo'
   get '/feed', to: 'pages#feed'
   get '/faq', to: 'pages#faq'
   get '/news', to: 'pages#news'

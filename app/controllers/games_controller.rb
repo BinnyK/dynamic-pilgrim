@@ -56,6 +56,7 @@ class GamesController < ApplicationController
       @game.loser_id = @loser.id
 
       Game.addResult(@all_ranks, @winner, @loser)
+      Game.setElo(@winner, @loser)
 
       authorize @game
       respond_to do |format|

@@ -1,0 +1,42 @@
+
+<%#= image_tag(asset_path("tt1.png")) %>
+<img src="<%= asset_path("cfaponglogo.png" ) %>" class="logo-banner" />
+<h1 class="title is-1 has-text-centered main-title">Rankings</h1>
+
+<%= render 'partials/badges' %>
+
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <p class="has-text-centered"><%= link_to "Enter results", new_game_path, class:"button is-primary" %></p>
+  <% end %>
+<% end %>
+
+<div class="columns">
+  <div class="column is-8 is-offset-2">
+    <div class="table-box">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><abbr title="Position">Pos</abbr></th>
+            <th>Name</th>
+            <th><abbr title="Won">W</abbr></th>
+            <th><abbr title="Lost">L</abbr></th>
+            <th><abbr title="Points">ELO</abbr></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each_with_index do |user, index|%>
+            <tr>
+              <th><%= index + 1 %></th>
+              <td><%= link_to user.username, user %></td>
+              <td><%= user.wins %></td>
+              <td><%= user.losses %></td>
+              <td><%= user.elo %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

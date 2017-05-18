@@ -254,4 +254,22 @@ class Game < ApplicationRecord
 		counter
 	end
 
+	def self.expectedScore(player_elo, opponent_elo)
+		expected = 1/(1+10**((opponent_elo-player_elo)/400)).rationalize
+	end
+
+	def self.setElo(winner, loser)
+		k = 32
+		winner_expected = expectedScore(winner.elo.to_f, loser.elo.to_f)
+		puts "winner_expected: #{winner_expected}"
+		loser_expected = expectedScore(loser.elo.to_f, winner.elo.to_f)
+		puts "loser_expected: #{loser_expected}"
+		winner.elo = winner.elo + (k*(1 - winner_expected))
+		puts "winner.elo: #{winner.elo}"
+		loser.elo = loser.elo + (k*(0 - loser_expected))
+		puts "loser.elo: #{loser.elo}"
+		winner.save
+		loser.save
+	end
+
 end
